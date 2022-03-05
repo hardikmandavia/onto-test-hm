@@ -1,18 +1,20 @@
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
-export interface AppMessages {
-  message: string;
-  error?: string;
-}
+import { GroupedTransactions, Transaction } from '../types';
+
+import DATA from '../seed/onto-transactions.json';
 
 interface ContextData {
-  appMessages: AppMessages;
-  setAppMessages: (appMessages: AppMessages) => void;
+  transactions?: GroupedTransactions;
+  setTransactions: (appMessages: GroupedTransactions) => void;
 }
-
-const DEFAULT_APP_MESSAGES: AppMessages = {
-  message: 'Hello, World!',
-};
 
 export const Context = createContext<ContextData | undefined>(undefined);
 
@@ -28,11 +30,25 @@ interface Props {
   children: ReactNode;
 }
 const Provider = ({ children }: Props) => {
-  const [appMessages, setAppMessages] =
-    useState<AppMessages>(DEFAULT_APP_MESSAGES);
+  const [transactions, setTransactions] = useState<GroupedTransactions>();
+
+  useEffect(() => {
+    console.log('here');
+    const grouped = (DATA as Transaction[]).reduce(
+      (acc: GroupedTransactions, current: Transaction) => {
+        acc[current.date] = acc[current.date] || { success: [], failed: [] };
+        acc[current.date][current.transactionType].push(current);
+        return acc;
+      },
+      {}
+    );
+
+    setTransactions(grouped);
+  }, []);
+
   const appContextState = useMemo(
-    () => ({ appMessages, setAppMessages }),
-    [appMessages, setAppMessages]
+    () => ({ transactions, setTransactions }),
+    [transactions, setTransactions]
   );
 
   return (

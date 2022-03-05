@@ -2491,22 +2491,22 @@ eslint-plugin-react-hooks@^4.3.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
   integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
 
-eslint-plugin-react@^7.27.1:
-  version "7.27.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.27.1.tgz#469202442506616f77a854d91babaae1ec174b45"
-  integrity sha512-meyunDjMMYeWr/4EBLTV1op3iSG3mjT/pz5gti38UzfM4OPpNc2m0t2xvKCOMU5D6FSdd34BIMFOvQbW+i8GAA==
+eslint-plugin-react@^7.29.3:
+  version "7.29.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.29.3.tgz#f4eab757f2756d25d6d4c2a58a9e20b004791f05"
+  integrity sha512-MzW6TuCnDOcta67CkpDyRfRsEVx9FNMDV8wZsDqe1luHPdGTrQIUaUXD27Ja3gHsdOIs/cXzNchWGlqm+qRVRg==
   dependencies:
     array-includes "^3.1.4"
     array.prototype.flatmap "^1.2.5"
     doctrine "^2.1.0"
     estraverse "^5.3.0"
     jsx-ast-utils "^2.4.1 || ^3.0.0"
-    minimatch "^3.0.4"
+    minimatch "^3.1.2"
     object.entries "^1.1.5"
     object.fromentries "^2.0.5"
     object.hasown "^1.1.0"
     object.values "^1.1.5"
-    prop-types "^15.7.2"
+    prop-types "^15.8.1"
     resolve "^2.0.0-next.3"
     semver "^6.3.0"
     string.prototype.matchall "^4.0.6"
@@ -3788,6 +3788,13 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
+minimatch@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
+  integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
+  dependencies:
+    brace-expansion "^1.1.7"
+
 minimist@^1.2.0, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
@@ -4318,7 +4325,7 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4326,6 +4333,15 @@ prop-types@^15.6.2, prop-types@^15.7.2:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.8.1"
+
+prop-types@^15.8.1:
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
+  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.13.1"
 
 proxy-addr@~2.0.5:
   version "2.0.7"
@@ -4391,7 +4407,7 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
+react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -4493,10 +4509,18 @@ regenerator-transform@^0.14.2:
   dependencies:
     "@babel/runtime" "^7.8.4"
 
-regexp.prototype.flags@^1.2.0, regexp.prototype.flags@^1.3.1:
+regexp.prototype.flags@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.3.1.tgz#7ef352ae8d159e758c0eadca6f8fcb4eef07be26"
   integrity sha512-JiBdRBq91WlY7uRJ0ds7R+dU02i6LKi8r3BuQhNXn+kmeLN+EfHhfjqMRis1zJxnlu88hq/4dx0P2OP3APRTOA==
+  dependencies:
+    call-bind "^1.0.2"
+    define-properties "^1.1.3"
+
+regexp.prototype.flags@^1.3.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.4.1.tgz#b3f4c0059af9e47eca9f3f660e51d81307e72307"
+  integrity sha512-pMR7hBVUUGI7PMA37m2ofIdQCsomVnas+Jn5UPGAHQ+/LlwKm/aTLJHdasmHRzlfeZwHiAOaRSo2rbBDm3nNUQ==
   dependencies:
     call-bind "^1.0.2"
     define-properties "^1.1.3"

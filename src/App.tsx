@@ -15,7 +15,7 @@ export const App = () => {
               <div>This is a test page</div>
             </Route>
             <Route path="/" exact>
-              <Home message="Hello World!" />
+              <Home />
             </Route>
           </Switch>
         </Router>
