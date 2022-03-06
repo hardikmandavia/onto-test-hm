@@ -1,444 +1,49 @@
-Initialise Project
+# ONTO React Engineer Test - HARDIK MANDAVIA
 
-```
-npm init --y
-```
-
-Add React
-
-```
-yarn add react react-dom
-```
-
-Add TypeScript
-
-```
-yarn add -D typescript @types/react @types/react-dom
-```
-
-Add `tsconfig.json` to root of the project and copy:
-
-```
-{
-  "compilerOptions": {
-    "target": "ES5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
-    "module": "ESNext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
-    "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */ /* Type declaration files to be included in compilation. */,
-    "lib": [
-      "DOM",
-      "ESNext"
-    ] /* Specify library files to be included in the compilation. */,
-    "jsx": "react-jsx" /* Specify JSX code generation: 'preserve', 'react-native', 'react' or 'react-jsx'. */,
-    "noEmit": true /* Do not emit outputs. */,
-    "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
-    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
-    "strict": true /* Enable all strict type-checking options. */,
-    "skipLibCheck": true /* Skip type checking of declaration files. */,
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
-    "resolveJsonModule": true
-    // "allowJs": true /* Allow javascript files to be compiled. Useful when migrating JS to TS */,
-    // "checkJs": true /* Report errors in .js files. Works in tandem with allowJs. */,
-  },
-  "include": ["src/**/*"]
-}
-
-```
-
-Add `App.tsx` file to `src` and include:
-
-```
-export const App = () => {
-  return <h1>React TypeScript Webpack Starter Template</h1>
-};
-
-```
-
-Add entrypoint `index.tsx` to `src` and include:
-
-```
-import ReactDOM from 'react-dom';
-import { App } from './App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
-```
-
-Add Babel packages:
-
-```
-yarn add -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript @babel/plugin-transform-runtime
-```
-
-Add `.babelrc` file to root with:
-
-```
-{
-  "presets": [
-    "@babel/preset-env",
-    [
-      "@babel/preset-react",
-      {
-        "runtime": "automatic"
-      }
-    ],
-    "@babel/preset-typescript"
-  ]
-}
-
-```
-
-Add Webpack packages:
-
-```
-yarn add -D webpack webpack-cli webpack-dev-server html-webpack-plugin
-```
-
-Add `babel-loader`
-
-```
-yarn add -D babel-loader
-```
-
-Add initial webpack config to `./webpack/webpack.config.js`:
-
-```
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-module.exports = {
-  entry: path.resolve(__dirname, '..', './src/index.tsx'),
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-          }
-        ]
-      }
-    ]
-  },
-  output: {
-    path: path.resolve(__dirname, '..', './build'),
-    filename: 'bundle.js',
-  },
-  mode: 'development',
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '..', './src/index.html'),
-    }),
-  ],
-}
-
-```
-
-Add `start` script to `package.json`:
-
-```
-{
-  ...
-  scripts: {
-    ...
-    "start": webpack serve --config webpack/webpack.config.js --open
-  }
-  ...
-}
-```
-
-(For css support):
-
-Add style loaders:
-
-```
-yarn add -D css-loader style-loader
-```
-
-In `webpack.config.js`:
-
-```
-module.exports = {
-  ...
-  module: {
-    ...
-    rules: [
-      ...
-      {
-        test: /\.css/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ]
-  }
-}
-```
-
-(for image support)
-
-Add declaration in declaration file (`./src/declarations.d.ts`) for image extension e.g. `png`:
-
-```
-declare module '*.png'
-```
 
-Add rule to `webpack.config.js`:
-
-module.exports = {
-...
-module: {
-...
-rules: [
-...
-{
-test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-type: 'asset/resource',
-},
-]
-}
-}
-
-(For inline asset support)
-
-Add declaration in declaration file for extension e.g. `svg`:
+## To Run
 
 ```
-declare module '*.svg'
-```
-
-Add rule to `webpack.config.js`:
-
-module.exports = {
-...
-module: {
-...
-rules: [
-...
-{
-test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-type: 'asset/inline',
-},
-]
-}
-}
-
-(For multiple environment support)
-
-Rename `webpack.config.js` to `webpack.common.js`
-
-Add `webpack.dev.js`, `webpack.production.js` and a new `webpack.config.js` files to `webpack` folder.
-
-In `webpack.dev.js`:
-
-```
-module.exports = {
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
-}
-
-```
-
-In `webpack.prod.js`:
-
-```
-module.exports = {
-  mode: 'production',
-  devtool: 'source-map',
-}
-
-```
-
-Add `webpack-merge` package:
-
-```
-yarn add -D webpack-merge
-```
-
-In `webpack.config.js`:
-
-```
-const { merge } = require('webpack-merge');
-const commonConfig = require('./webpack.common.js');
-
-module.exports = (envVars) => {
-  const { env } = envVars;
-  const envConfig = require(`./webpack.${env}.js`);
-  const config = merge(commonConfig, envConfig);
-  return config;
-};
-
-```
-
-In `package.json`, update `start` script and add `build` script:
-
-```
-...
-scripts: {
-  ...
-  "start": "webpack serve --config webpack/webpack.config.js --env env=dev --open",
-  "build": "webpack --config webpack/webpack.config.js --env env=prod --open",
-}
-```
-
-(For linting support)
-
-Add linting packages:
-
-```
-yarn add -D eslint eslint-plugin-react eslint-plugin-react-hooks @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-eslint-comments
-```
-
-Add `.eslintrc.js` to root:
-
-```
-module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-  extends: [
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'plugin:jsx-a11y/recommended',
-    'plugin:eslint-comments/recommended',
-    'prettier',
-  ],
-  rules: {
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
-    '@typescript-eslint/no-var-requires': 'off',
-    'react/prop-types': 'off',
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-  },
-}
-
-```
-
-Add lint script:
-
-```
-scripts: {
-  ...
-  "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx,json}\""
-}
-```
-
-(For `prettier` support)
-
-Add `prettier` packages:
-
-```
-yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
-```
-
-Add format script:
+yarn
 
+yarn start
 ```
-scripts: {
-  ...
-  "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
-}
-```
 
-(For Husky support)
+## Set up
 
-Add husky packages:
+The initial project was set up using a template project I have previously set up while doing my own R&D and practice in setting up a React + TS project from scratch without the use of NextJS or CreateReactApp etc.
 
-```
-yarn add -D husky@4 lint-staged
-```
+This project can be found on my github page [here](https://github.com/hardikmandavia/react-template-ts), including a step by step guide to setting up the project from scratch that I had built up through that previous exercise.
 
-In `package.json` add:
+This project is set up using `react v17.0.2` with `webpack` and `typescript v4.5.2` and uses `styled-components` to handle the styling.
 
-```
-...
-"lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json}": [
-      "eslint --fix"
-    ],
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  }
-```
+There are some examples of implementations of some basic react concepts included as part of the template as well, including:
 
-(For `await/async` support)
+- a reusable react hook called `useInterval` that can be used as a polling/timeout implementation in a component.
 
-Add packages:
+- a basic implementation of a context
 
-```
-yarn add -D @babel/runtime @babel/plugin-transform-runtime
-```
+- routing using `react-router-dom` which sets up an entry route as well as an example `/test` that just displays a generic message.
 
-In `.babelrc` add:
+## Development and thoughts
 
-```
-...
-"plugins": [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "regenerator": true
-      }
-    ]
-  ]
-```
+I leveraged one the context implementation in order to separate some data handling from the ui components in that I renamed/updated the context properties and made use of the `useEffect` hook to iterate over the seed data json file provided for this test and group the data by year and then by date within the year. I appreciate the seed data only included data from a single year so for an MVP implementation it may not have been required to group the data by year as well, but doing this makes the data grouping function a bit more scalabe and robust as well as allow for a better implementation of the Heatmap component.
 
-(For copy webpack support)
+The Heatmap component itself initially creates a set off arrays to model a full year i.e. 365 days for a given year (or 366 if the given year is a leap year), 12 months and 7 days of the week in order to iterate to build all the cells and the axis labels. This allowed for an implementation of the Heatmap for an anonymous year, but would be incorrect for a given year as initially the first cell would be aligned with `Su` which wouldn't be correct for most years. So in order to correct this I included the year as a property on the heatmap to allow construction of the first date of the year i.e. `{year}-01-01` and get the day integer of this date to then calculate an offset for the first cell to push the cells to align with the correct day.
 
-Add `copy-webpack-plugin` package:
+I kept the data map expected by the Heatmap component more generic and not assuming a specific format for the tooltips (i.e. not to expect values for successful / failed transactions for example) and expects only a value and a react node for the tooltip contents.
 
-```
-yarn add -D copy-webpack-plugin
-```
+When parsing the data to be passed to the heatmap, the grouped data set is iterated on the initial keys (i.e. the years, then a set of data is contstructed for each date by calculating the difference of successful to failed transactions and constructing the contents of the tooltip with the date and values for successful and failed), then, when rendering, a Heatmap is rendered for every year in the dataset.
 
-In `webpack.common.js` add:
+For the cell display itself, the color of the cell without any data is the default very transparent black color. If there is data and the value is 0 (i.e. equal success to failed) the color is set to a more opaque black color. If this value is greater or less than 0, this value controls the `alpha` value of the color and the color itself is red for negative and green for positive.
 
-```
-...
-plugins: [
-  ...
-  new CopyPlugin({
-      patterns: [
-        { from: "source", to: "dest"}
-      ]
-    })
-]
-```
 
-(For bundle analyzer)
+## Improvements
 
-Add package:
+Some steps I wouldd take to improve on my implementation:
 
-```
-yarn add -D webpack-bundle-analyzer
-```
+- include some basic unit testing in order to check the components are rendered correctly as well as test some events such as the onMouseEnter and onMouseLeave events on the cell component.
 
-In `webpack.prod.js` add:
+- extract the various colors and some fixed heights/widths/margins etc out into a constants file as well as some calculated totals for these measurements. Currently there are a few "magic numbers" being used and would be better to add context behind them using some meaningful variable names, e.g. for the first cell offset described above, the day integer is multiplied by `16` to calculate the offset, this number is actually the totals of `height`, `margin` and `border` of a single cell.
 
-```
-...
-plugins: [
-  ...
-  new BundleAnalyzerPlugin()
-]
-```
+- This implementation is currently not responsive. The container has an `overflow: scroll` to allow the Heatmap to maintain its width but will scroll on smaller screens. Instead, it would be better for small screens, the Heatmap switches to a vertical format (i.e. the days of the week across the top and the months down the left).

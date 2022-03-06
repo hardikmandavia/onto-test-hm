@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <Container>
-      <h1>My React App with TypeScript and Webpack 5</h1>
+      <h1>ONTO React Engineer Test - HARDIK MANDAVIA</h1>
       {data &&
         Object.keys(data).map((year) => (
           <HeatmapContainer key={year}>
