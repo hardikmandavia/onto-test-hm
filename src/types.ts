@@ -4,9 +4,15 @@ export interface Transaction {
   amount: number;
 }
 
-export interface GroupedTransactions {
-  [key: string]: {
-    success: Transaction[];
-    failed: Transaction[];
-  };
+export interface TotalsByDate {
+  success: Transaction[];
+  failed: Transaction[];
+}
+
+export interface TotalsByYear {
+  [date: string]: TotalsByDate;
+}
+
+export interface GroupedTotals {
+  [year: string]: TotalsByYear;
 }

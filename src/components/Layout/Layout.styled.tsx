@@ -8,4 +8,6 @@ export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   color: #cccccc;
+  padding: 10px;
+  font-family: sans-serif;
 `;

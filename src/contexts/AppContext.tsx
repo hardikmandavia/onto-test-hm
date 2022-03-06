@@ -7,13 +7,13 @@ import {
   useState,
 } from 'react';
 
-import { GroupedTransactions, Transaction } from '../types';
+import { GroupedTotals, Transaction } from '../types';
 
 import DATA from '../seed/onto-transactions.json';
 
 interface ContextData {
-  transactions?: GroupedTransactions;
-  setTransactions: (appMessages: GroupedTransactions) => void;
+  transactions?: GroupedTotals;
+  setTransactions: (appMessages: GroupedTotals) => void;
 }
 
 export const Context = createContext<ContextData | undefined>(undefined);
@@ -30,14 +30,19 @@ interface Props {
   children: ReactNode;
 }
 const Provider = ({ children }: Props) => {
-  const [transactions, setTransactions] = useState<GroupedTransactions>();
+  const [transactions, setTransactions] = useState<GroupedTotals>();
 
   useEffect(() => {
     console.log('here');
     const grouped = (DATA as Transaction[]).reduce(
-      (acc: GroupedTransactions, current: Transaction) => {
-        acc[current.date] = acc[current.date] || { success: [], failed: [] };
-        acc[current.date][current.transactionType].push(current);
+      (acc: GroupedTotals, current: Transaction) => {
+        const year = new Date(Date.parse(current.date)).getFullYear();
+        acc[year] = acc[year] || {};
+        acc[year][current.date] = acc[year][current.date] || {
+          success: [],
+          failed: [],
+        };
+        acc[year][current.date][current.transactionType].push(current);
         return acc;
       },
       {}
